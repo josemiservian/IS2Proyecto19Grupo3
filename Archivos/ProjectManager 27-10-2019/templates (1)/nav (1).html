@@ -1,0 +1,35 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg fixed-top" id="main-navbar">
+    <div class="container">
+
+        <a class="navbar-brand pr-5" style="border-right: 1px solid #efefef;" href="{% url "proyectos:feed" %}">
+            <img src="{% static "img/descarga.png" %}" height="45" class="d-inline-block align-top"/>
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+
+                
+
+                <li class="nav-item nav-icon">
+                    <a href="{% url "proyectos:create" %}">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                </li>
+                
+                <li class="nav-item nav-icon">
+                    <a href="{% url "usuarios:create" %}">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                </li>
+
+                <li class="nav-item nav-icon">
+                    <a href="{% url "usuarios:logout" %}">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>

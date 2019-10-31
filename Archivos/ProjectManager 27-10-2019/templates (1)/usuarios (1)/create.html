@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title>Crear un usuario</title>
+{% endblock %}
+
+{% block container %}
+
+    {% if form.errors %}
+    <p class="alert alert-danger">
+        Your username and password didn't match. Please try again.
+    </p>
+    {% endif%}
+
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-6 pt-3 pb-3" id="profile-box">
+                <h4 class="mb-4">Crear usuario</h4>
+
+                <form method="POST" action="{% url "usuarios:create" %}">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="usuario" value="{{ usuario.pk}}" />
+                    <input type="hidden" name="perfil" value="{{ perfil.pk }}" />
+
+                    {# Nombre Proyecto #}
+                   
+                    <div class="form-group">
+                            <label> Nombre de usuario</label>
+                        <input
+                            class="form-control {% if form.nombre.errors %}is-invalid{% endif %}"
+                            type="text"
+                            name="nombre"
+                            placeholder="Nombre"
+                        >
+                        <div class="invalid-feedback">
+                            {% for error in form.nombre.errors %}{{ error }}{% endfor %}
+                        </div>
+                    </div>
+
+                    {# Estado #}
+                    <div class="form-group">
+                        <label>Estado del proyecto:</label>
+                        <input
+                            class="form-control {% if form.estado.errors %}is-invalid{% endif %}"
+                            type="text"
+                            name="estado"
+                            placeholder="estado"
+                        >
+                        <div class="invalid-feedback">
+                            {% for error in form.estado.errors %}{{ error }}{% endfor %}
+                        </div>
+                    </div>
+                    {# Fase #}
+                    <div class="form-group">
+                        <label>Fase del proyecto:</label>
+                        <input
+                            class="form-control {% if form.fase.errors %}is-invalid{% endif %}"
+                            type="text"
+                            name="fase"
+                            placeholder="fase"
+                        >
+                        <div class="invalid-feedback">
+                            {% for error in form.fase.errors %}{{ error }}{% endfor %}
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block mt-5">Crear</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+{% extends "base.html" %}
+
+{% block head_content %}
+<title>Creacion de Usuario</title>
+{% endblock%}
+
+{% block container %}
+
+    {% if form.errors %}
+        <p class="alert alert-danger">
+            Your username and password didn't match. Please try again.
+        </p>
+    {% endif%}
+
+    <form method="POST" action="{% url "usuarios:create" %}">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <input class="form-control" type="text" placeholder="Username" name="username" />
+        </div>
+
+        <div class="form-group">
+            <input class="form-control" type="password" placeholder="Password" name="password" />
+        </div>
+
+        
+        <button class="btn btn-primary btn-block mt-5" type="submit">Crear usuario</button>
+
+    </form>
+
+{% endblock %}
