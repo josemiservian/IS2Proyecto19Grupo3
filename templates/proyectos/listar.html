@@ -1,0 +1,54 @@
+              <th scope="col">nombre</th>
+{% extends "base.html" %}
+{% block head_content %}
+<title>lista de Proyectos asdf</title>
+{% endblock %}
+{% block container %}
+
+    <div class="row justify-content-md-center">
+        <div class="col-6 pt-3 pb-3" id="profile-box">
+
+        <h1  >Lista de Proyectos </h1>  
+        <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'proyectos:buscar' %}" >
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+          </form>         
+          <h1  > </h1>  
+
+    {% if proyectos %}
+        <table  class="table table-bordered" >
+          <thead>
+            <tr>
+                    <th scope="col">id</th>
+
+              <th scope="col">nombre</th>
+              <th scope="col">estado </th>
+              <th scope="col">fase</th>
+              <th scope="col">created</th>
+              <th scope="col">modified </th>
+              <th scope="col">delete </th>
+
+
+            </tr>
+          </thead> 
+          {% for proyecto in proyectos %}
+            <tr>
+
+                <th scope="row"> <a href="{% url 'proyectos:editar' pk=proyecto.pk %}">{{ proyecto.pk }}</a> </th>
+                <td>{{ proyecto.nombre }}</td>
+                <td>{{ proyecto.estado }}</td>
+                <td>{{ proyecto.fase }}</td> 
+                <td>{{ proyecto.created }}</td>            
+                <td>{{ proyecto.modified }}</td>            
+
+                <td><a href="{% url 'proyectos:delete' pk=proyecto.pk %}" class="top-menu"><i class="fas fa-trash"></i></a></td>            
+            </tr>
+          {% endfor %}
+        </table>   
+    {% else %}
+      <p>No hay Proyectos cargados</p>
+    {% endif %}    
+    </div>    
+  </div>    
+
+{% endblock %}

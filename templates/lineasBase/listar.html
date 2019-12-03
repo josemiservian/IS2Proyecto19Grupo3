@@ -1,0 +1,54 @@
+<th scope="col">nombre</th>
+{% extends "base.html" %}
+{% block head_content %}
+<title>lista de Proyectos asdf</title>
+{% endblock %}
+{% block container %}
+
+    <div class="row justify-content-md-center">
+        <div class="col-6 pt-3 pb-3" id="profile-box">
+
+        <h1  >Lista de lineas base </h1>  
+        <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'proyectos:buscar' %}" >
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+          </form>         
+          <h1  > </h1>  
+
+    {% if LineaBase %}
+        <table  class="table table-bordered" >
+          <thead>
+            <tr>
+                    <th scope="col">id</th>
+
+              <th scope="col">nombre</th>
+              <th scope="col">estado </th>
+              <th scope="col">proyecto</th>
+              <th scope="col">created</th>
+              <th scope="col">modified </th>
+              <th scope="col">delete </th>
+
+
+            </tr>
+          </thead> 
+          {% for lb in LineaBase %}
+            <tr>
+
+                <th scope="row"> <a href="{% url 'lineasBase:editar' pk=lb.pk %}">{{ lb.pk }}</a> </th>
+                <td>{{ lb.nombre }}</td>
+                <td>{{ lb.estado }}</td>
+                <td>{{ lb.proyecto }}</td> 
+                <td>{{ lb.created }}</td>            
+                <td>{{ lb.modified }}</td>            
+
+                <td><a href="{% url 'lineasBase:delete' pk=lb.pk %}" class="top-menu"><i class="fas fa-trash"></i></a></td>            
+            </tr>
+          {% endfor %}
+        </table>   
+    {% else %}
+      <p>No hay Proyectos cargados</p>
+    {% endif %}    
+    </div>    
+  </div>    
+
+{% endblock %}
